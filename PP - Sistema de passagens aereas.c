@@ -7,13 +7,10 @@ typedef struct agendamento
 {	//Informações pessoais do passageiro
 	char nome_completo_do_passageiro[50];
 	int data_de_nascimento;
-	char tipo_de_documento[3];
-	int numero_de_documento;
 	int passaporte;
 	int cep;
 	char genero[10];
 	int numero_de_telefone;   
-	char situação_fiscal[20];
 	// informações tecnincas da reserva
 	int quantidade_passageiros;
 	char tipo_de_classe[20];
