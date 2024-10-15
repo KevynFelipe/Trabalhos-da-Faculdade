@@ -35,7 +35,7 @@ void listar_passagens(Agendamentos *reserva, int quantidade_reservas)
 {
 
 };
-void verificar_passagens(Agendamentos *reserva, int quantidade_reservas)
+void buscar_passagens(Agendamentos *reserva, int quantidade_reservas)
 {
 
 };
@@ -76,7 +76,7 @@ void menu(Agendamentos **reserva, int *quantidade_reservas, int escolha)
 			listar_passagens(*reserva, *quantidade_reservas);
 			break;
 		case 4:
-			verificar_passagens(*reserva, *quantidade_reservas);
+			buscar_passagens(*reserva, *quantidade_reservas);
 			break;
 		case 5:
 			editar_passagens(*reserva, *quantidade_reservas);
@@ -88,13 +88,13 @@ void menu(Agendamentos **reserva, int *quantidade_reservas, int escolha)
 	} while (escolha_opcao != 7);
 };
 
-int main()
+int main(){
 	Agendamentos *reservas = NULL;
 	int quantidade_reservas = 0;
 	int escolha = 0;
 
 	carregar_passagens(&reservas, &quantidade_reservas);
-{	setlocale(LC_ALL, "Portuguese");
+	setlocale(LC_ALL, "Portuguese");
 	printf("Inicializando Sistema de agendamento de passagem aérea");
 	menu(&reservas, &quantidade_reservas, escolha);
 	printf("Encerrando Sistema...");
