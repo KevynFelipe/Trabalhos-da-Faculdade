@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
 int verificar_telefone(char numero_de_celular[12]){
     size_t i = 0;
     for (i = 0; i < strlen(numero_de_celular); i++){
