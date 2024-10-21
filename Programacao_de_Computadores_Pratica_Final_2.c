@@ -14,13 +14,13 @@ int main(){
 
 // temperaturas.txt é aberto e lido, extraindo cada valor por meio do fgets() + while. Logo é convertido em double e somado à variável soma
     temperaturas=fopen ("temperaturas.txt", "r");
-        printf("Abrindo arquivo temperaturas.txt...\n");
+        printf("\nAbrindo arquivo temperaturas.txt...\n");
         if (temperaturas == NULL) { printf("Não foi possível abrir o arquivo"); }
         while(fgets(temperatura_recebida, sizeof(temperatura_recebida), temperaturas) != NULL)
         {
         soma = soma + atof(temperatura_recebida);
         contador++;
-        printf("\n%i°Temperatura de: %f Graus Celsius\n", contador ,atof(temperatura_recebida));
+        printf("\n%i°Temperatura de: %.2f Graus Celsius\n", contador ,atof(temperatura_recebida));
         };
         printf("\nFechando arquivo temperaturas.txt...\n");
     fclose(temperaturas);
