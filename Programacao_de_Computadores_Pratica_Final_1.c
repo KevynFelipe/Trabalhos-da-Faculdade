@@ -5,6 +5,8 @@
 
 int verificar_telefone(char numero_de_celular[12]){
     size_t i = 0;
+    printf("\nIniciando verificação do número: %s\n", numero_de_celular);
+
     for (i = 0; i < strlen(numero_de_celular); i++){
     if (isdigit(numero_de_celular[i])){
         printf("%c é um número!\n", numero_de_celular[i]);}
