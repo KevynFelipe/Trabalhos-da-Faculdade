@@ -20,7 +20,7 @@ int main(){
         {
         soma = soma + atof(temperatura_recebida);
         contador++;
-        printf("\n%i°Temperatura de: %s Graus Celsius\n", contador ,temperatura_recebida);
+        printf("\n%i°Temperatura de: %f Graus Celsius\n", contador ,atof(temperatura_recebida));
         };
         printf("\nFechando arquivo temperaturas.txt...\n");
     fclose(temperaturas);
