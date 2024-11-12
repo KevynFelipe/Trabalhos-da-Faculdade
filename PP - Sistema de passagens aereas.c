@@ -20,14 +20,6 @@ typedef struct agendamento
 	char companhia_aerea[30];
 	int numero_da_reserva;
 }	Agendamentos;
-//replace troca os Espaços ' ' por Underlines '_', evitando erros na hora do carregamento do arquivo. 
-void replace(char *string) {
-    for (int i = 0; string[i] != '\0'; i++) {
-        if (string[i] == ' ') {
-            string[i] = '_';
-        }
-    }
-}
 
 void flush_in(){ 
     int ch;
@@ -46,6 +38,7 @@ void criar_passagem(Agendamentos **reserva, int *quantidade_reservas)
 
 	printf("Nome completo: ");
 	scanf("%s[^\n]", (*reserva)[contador_reservas].nome_passageiro);
+	(*reserva)[contador_reservas].nome_passageiro[0] = toupper((*reserva)[contador_reservas].nome_passageiro[0]);
 
 	printf("idade: ");
 	scanf("%i", &(*reserva)[contador_reservas].idade);
@@ -57,7 +50,7 @@ void criar_passagem(Agendamentos **reserva, int *quantidade_reservas)
 	}
 	else if ((*reserva)[contador_reservas].idade <= 2)
 	{
-		strcpy((*reserva)[contador_reservas].tipo_passagem, "Não_paga");
+		strcpy((*reserva)[contador_reservas].tipo_passagem, "Não paga");
 		printf((*reserva)[contador_reservas].tipo_passagem);
 	}
 	else {
@@ -71,71 +64,48 @@ void criar_passagem(Agendamentos **reserva, int *quantidade_reservas)
 	printf("Numero de telefone: ");
 	scanf("%i", &(*reserva)[contador_reservas].numero_de_telefone);
 
-	printf("Digite o numero que corresponda a classe desejada: \n 1 - Econômica\n 2 - Econômica premium\n 3 - Executiva\n 4 - Primeira classe\n");
+	printf("Digite o numero que corresponda a classe desejada: \n 1 - Econômica\n 2 - Econômica premium\n 3 - Executiva\n 4 - Primeira classe: ");
 	int escolha;
 	do{
 		scanf("%i", &escolha);
-		if(escolha == 1){
-			strcpy((*reserva)[contador_reservas].tipo_de_classe, "Econômica");
-			break;
-		}
-		else if (escolha == 2){
-			strcpy((*reserva)[contador_reservas].tipo_de_classe, "Econômica_premium");
-			break;
-		}
-		else if (escolha == 3){
-			strcpy((*reserva)[contador_reservas].tipo_de_classe, "Executiva");
-			break;
-		}
-		else if (escolha == 4){
-			strcpy((*reserva)[contador_reservas].tipo_de_classe, "Primeira_classe");
-			break;
-		}
-		else{
-			printf("\nEscolha inexistente! Por gentileza escolha entre: \n 1 - Econômica\n 2 - Econômica premium\n 3 - Executiva\n 4 - Primeira classe");
-		}
+		if (escolha == 1){strcpy((*reserva)[contador_reservas].tipo_de_classe, "Econômica"); break;}
+		else if (escolha == 2){strcpy((*reserva)[contador_reservas].tipo_de_classe, "Econômica_premium"); break;}
+		else if (escolha == 3){strcpy((*reserva)[contador_reservas].tipo_de_classe, "Executiva"); break;}
+		else if (escolha == 4){strcpy((*reserva)[contador_reservas].tipo_de_classe, "Primeira_classe"); break;}
+		printf("\nEscolha inexistente! Por gentileza escolha entre: \n 1 - Econômica\n 2 - Econômica premium\n 3 - Executiva\n 4 - Primeira classe: ");
 	}while (escolha >! 4);
 
 	printf("Escolha um acento [1 à 100]: ");
 	scanf("%i", &(*reserva)[contador_reservas].numero_do_assento);
 
-	printf("Qual o seu destino: ");
-	scanf("%s[^\n]", (*reserva)[contador_reservas].local_de_destino);
-	replace((*reserva)[contador_reservas].local_de_destino);
-
+	printf("Escolha um destino: \n1 - Estados Unidos\n 2 - Russia\n 3 - China\n 4 - Canadá\n 5 - África:  ");
+	do{
+		scanf("%i", &escolha);
+		if (escolha == 1){strcpy((*reserva)[contador_reservas].local_de_destino, "Estados_Unidos"); break;}
+		else if (escolha == 2){strcpy((*reserva)[contador_reservas].local_de_destino, "Russia"); break;}
+		else if (escolha == 3){strcpy((*reserva)[contador_reservas].local_de_destino, "China"); break;}
+		else if (escolha == 4){strcpy((*reserva)[contador_reservas].local_de_destino, "Canadá"); break;}
+		else if (escolha == 5){strcpy((*reserva)[contador_reservas].local_de_destino, "África"); break;}
+		printf("Escolha invalida! Escolha um destino: \n1 - Estados Unidos\n 2 - Russia\n 3 - China\n 4 - Canadá\n 5 - África:  ");
+	}while (escolha >! 5);
+	
+	
 	printf("horario de embarque: ");
 	scanf("%s", (*reserva)[contador_reservas].horario_de_embarque);
 
-	printf("Digite um numero que corresponda a Companhia aérea desejada: \n 1 - LATAM \n 2 - Gol\n 3 - Azul\n 4 - Avianca\n 5 - Passaredo\n");
+	printf("Digite um numero que corresponda a Companhia aérea desejada: \n 1 - LATAM \n 2 - Gol\n 3 - Azul\n 4 - Avianca\n 5 - Passaredo: ");
 	do{
 		scanf("%i", &escolha);
-		if(escolha == 1){
-			strcpy((*reserva)[contador_reservas].companhia_aerea, "LATAM");
-			break;
-		}
-		else if (escolha == 2){
-			strcpy((*reserva)[contador_reservas].companhia_aerea, "Gol");
-			break;
-		}
-		else if (escolha == 3){
-			strcpy((*reserva)[contador_reservas].companhia_aerea, "Azul");
-			break;
-		}
-		else if (escolha == 4){
-			strcpy((*reserva)[contador_reservas].companhia_aerea, "Avianca");
-			break;
-		}
-		else if (escolha == 5){
-			strcpy((*reserva)[contador_reservas].companhia_aerea, "Passaredo");
-			break;
-		}
-		else {
-			printf("\nEscolha inexistente! Por gentileza escolha entre: \n 1 - LATAM \n 2 - Gol\n 3 - Azul\n 4 - Avianca\n 5 - Passaredo");
-		}
+		if (escolha == 1){strcpy((*reserva)[contador_reservas].companhia_aerea, "LATAM"); break;}
+		else if (escolha == 2){strcpy((*reserva)[contador_reservas].companhia_aerea, "Gol"); break;}
+		else if (escolha == 3){strcpy((*reserva)[contador_reservas].companhia_aerea, "Azul"); break;}
+		else if (escolha == 4){strcpy((*reserva)[contador_reservas].companhia_aerea, "Avianca"); break;}
+		else if (escolha == 5){strcpy((*reserva)[contador_reservas].companhia_aerea, "Passaredo"); break;}
+		printf("\nEscolha inexistente! Por gentileza escolha entre: \n 1 - LATAM \n 2 - Gol\n 3 - Azul\n 4 - Avianca\n 5 - Passaredo: ");
 	}while (escolha >! 5);
 
 	(*reserva)[contador_reservas].numero_da_reserva = contador_reservas;
-	printf("O numero de sua passage é %i", contador_reservas);
+	printf("O numero de sua passagem é %i", contador_reservas);
 
 	(*quantidade_reservas)++;
 
@@ -195,17 +165,17 @@ void listar_passagens(Agendamentos *reserva, int quantidade_reservas)
 	for (int i = 0; i < quantidade_reservas; i++)
 {
 	printf("\nReserva %d:\n", i + 1);
-			printf("Nome: %s\n", reserva[i].nome_passageiro);
-            printf("Idade: %d\n", reserva[i].idade);
-			printf("Tipo de Passagem: %s\n", reserva[i].tipo_passagem);
-            printf("Identificação Passaporte: %s\n", reserva[i].identificacao_passaporte);
-            printf("Telefone: %d\n", reserva[i].numero_de_telefone);
-			printf("Classe: %s\n", reserva[i].tipo_de_classe);
-            printf("Número do Assento: %d\n", reserva[i].numero_do_assento);
-            printf("Check-in/Check-out: %s\n", reserva[i].horario_de_embarque);
-            printf("Embarque/Desembarque: %s\n", reserva[i].local_de_destino);
-            printf("Companhia Aérea: %s\n", reserva[i].companhia_aerea);
-            printf("Número da Reserva: %d\n", reserva[i].numero_da_reserva);
+	printf("Nome: %s\n", reserva[i].nome_passageiro);
+    printf("Idade: %d\n", reserva[i].idade);
+	printf("Tipo de Passagem: %s\n", reserva[i].tipo_passagem);
+    printf("Identificação Passaporte: %s\n", reserva[i].identificacao_passaporte);
+    printf("Telefone: %d\n", reserva[i].numero_de_telefone);
+	printf("Classe: %s\n", reserva[i].tipo_de_classe);
+    printf("Número do Assento: %d\n", reserva[i].numero_do_assento);
+    printf("Check-in/Check-out: %s\n", reserva[i].horario_de_embarque);
+    printf("Embarque/Desembarque: %s\n", reserva[i].local_de_destino);
+    printf("Companhia Aérea: %s\n", reserva[i].companhia_aerea);
+    printf("Número da Reserva: %d\n", reserva[i].numero_da_reserva);
 };
 };
 
@@ -215,7 +185,7 @@ char nome_busca[50];
 int encontradas = 0;
 printf("\nDigite o nome do passageiro que deseja buscar: ");
 scanf(" %s[^\n]", nome_busca);
-
+nome_busca[0] = toupper(nome_busca[0]);
 for (int i = 0; i < quantidade_reservas; i++)
 {
 if (strcmp(reserva[i].nome_passageiro, nome_busca) == 0)
@@ -240,10 +210,78 @@ if (strcmp(reserva[i].nome_passageiro, nome_busca) == 0)
 		printf("Nenhuma reserva encontrada para o nome \"%s\".\n", nome_busca);
 	};
 };
-// void editar_passagens(Agendamentos *reserva, int quantidade_reservas)
-// {
 
-// };
+void editar_passagens(Agendamentos *reserva, int quantidade_reservas)
+{
+    int reserva_editar;
+    printf("Digite o numero da reserva que deseja editar: ");
+    scanf("%d", &reserva_editar);
+
+    if (reserva_editar < 1 || reserva_editar > quantidade_reservas) {
+        printf("Numero de reserva inválido.\n");
+        return;
+    }
+
+    int i = reserva_editar - 1; 
+
+    printf("Editando a reserva de %s:\n", reserva[i].nome_passageiro);
+
+    printf("Novo nome (atual: %s): ", reserva[i].nome_passageiro);
+    scanf("%s[^\n]", reserva[i].nome_passageiro);
+	reserva[i].nome_passageiro[0] = toupper(reserva[i].nome_passageiro[0]);
+
+    printf("Nova idade (atual: %d): ", reserva[i].idade);
+    scanf("%d", &reserva[i].idade);
+
+    printf("Novo passaporte (atual: %s): ", reserva[i].identificacao_passaporte);
+    scanf("%s[^\n]", reserva[i].identificacao_passaporte);
+
+    printf("Novo telefone (atual: %d): ", reserva[i].numero_de_telefone);
+    scanf("%d", &reserva[i].numero_de_telefone);
+
+    printf("Escolha a nova classe (1-Econômica, 2-Premium, 3-Executiva, 4-Primeira): ");
+    int escolha;
+    scanf("%d", &escolha);
+	do{
+        if (escolha == 1){ strcpy(reserva[i].tipo_de_classe, "Econômica"); break;}
+        else if (escolha == 2){strcpy(reserva[i].tipo_de_classe, "Premium"); break;}
+        else if (escolha == 3){strcpy(reserva[i].tipo_de_classe, "Executiva"); break;}
+        else if (escolha == 4){strcpy(reserva[i].tipo_de_classe, "Primeira"); break;}
+		scanf("%i", &escolha);
+        printf("Escolha invalida! Escolha uma nova classe (1-Econômica, 2-Premium, 3-Executiva, 4-Primeira): ");
+	} while (escolha >! 4);
+	
+    printf("Novo assento (atual: %d): ", reserva[i].numero_do_assento);
+    scanf("%d", &reserva[i].numero_do_assento);
+
+    printf("Novo destino (atual: %s): ", reserva[i].local_de_destino);
+    do{
+		scanf("%i", &escolha);
+		if (escolha == 1){strcpy(reserva[i].local_de_destino, "Estados_Unidos"); break;}
+		else if (escolha == 2){strcpy(reserva[i].local_de_destino, "Russia"); break;}
+		else if (escolha == 3){strcpy(reserva[i].local_de_destino, "China"); break;}
+		else if (escolha == 4){strcpy(reserva[i].local_de_destino, "Canadá"); break;}
+		else if (escolha == 5){strcpy(reserva[i].local_de_destino, "África"); break;}
+		printf("Escolha invalida! Escolha um destino: \n1 - Estados Unidos\n 2 - Russia\n 3 - China\n 4 - Canadá\n 5 - África:  ");
+	}while (escolha >! 5);
+
+    printf("Novo horário de embarque (atual: %s): ", reserva[i].horario_de_embarque);
+    scanf("%s", reserva[i].horario_de_embarque);
+
+    printf("Escolha a nova companhia aérea (1-LATAM, 2-Gol, 3-Azul, 4-Avianca, 5-Passaredo): ");
+    scanf("%d", &escolha);
+    do{
+		if (escolha == 1){strcpy(reserva[i].companhia_aerea, "LATAM"); break;}
+		else if (escolha == 2){strcpy(reserva[i].companhia_aerea, "Gol"); break;}
+		else if (escolha == 3){strcpy(reserva[i].companhia_aerea, "Azul"); break;}
+		else if (escolha == 4){strcpy(reserva[i].companhia_aerea, "Avianca"); break;}
+		else if (escolha == 5){strcpy(reserva[i].companhia_aerea, "Passaredo"); break;}
+		scanf("%i", &escolha);
+		printf("\nEscolha inexistente! Por gentileza escolha entre: \n 1 - LATAM \n 2 - Gol\n 3 - Azul\n 4 - Avianca\n 5 - Passaredo: ");
+	}while (escolha >! 5);
+	
+    printf("Passagem editada com sucesso!\n");
+};
 
 void excluir_passagem(Agendamentos **reserva, int *quantidade_reservas)
 {
@@ -287,7 +325,9 @@ void carregar_passagens(Agendamentos **reserva, int *quantidade_reservas)
  } 
  Agendamentos nova_reserva;
  while (1){
- if(fscanf(arquivo, "%s %i %s %s %i %s %i %s %s %s %i", nova_reserva.nome_passageiro, &nova_reserva.idade, nova_reserva.tipo_passagem, nova_reserva.identificacao_passaporte, &nova_reserva.numero_de_telefone, nova_reserva.tipo_de_classe, &nova_reserva.numero_do_assento, nova_reserva.local_de_destino, nova_reserva.horario_de_embarque, nova_reserva.companhia_aerea, &nova_reserva.numero_da_reserva) == 11)
+ if(fscanf(arquivo, "%s %i %s %s %i %s %i %s %s %s %i", nova_reserva.nome_passageiro, &nova_reserva.idade, nova_reserva.tipo_passagem, nova_reserva.identificacao_passaporte, 
+ &nova_reserva.numero_de_telefone, nova_reserva.tipo_de_classe, &nova_reserva.numero_do_assento, 
+ nova_reserva.local_de_destino, nova_reserva.horario_de_embarque, nova_reserva.companhia_aerea, &nova_reserva.numero_da_reserva) == 11)
  	{ 	
 	 	int tamanho = *quantidade_reservas + 1;
  		(*reserva) = (Agendamentos *)realloc(*reserva, tamanho * sizeof(Agendamentos));
@@ -333,12 +373,12 @@ void menu(Agendamentos **reserva, int *quantidade_reservas, int escolha_opcao)
 			case 4:
 				buscar_passagens(*reserva, *quantidade_reservas);
 				break;
-		// 	case 5:
-		// 		editar_passagens(*reserva, *quantidade_reservas);
-		// 		break;
-		// 	case 6:
-		// 		excluir_passagem(reserva, quantidade_reservas);
-		// 		break;
+			case 5:
+				editar_passagens(*reserva, *quantidade_reservas);
+				break;
+			case 6:
+				excluir_passagem(reserva, quantidade_reservas);
+				break;
 		} 
 	flush_in();
 	
