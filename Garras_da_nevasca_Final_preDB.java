@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Garras_da_nevasca_Final {
+public class Garras_da_nevasca_Final_preDB {
 	static Scanner input = new Scanner(System.in);
 	static Random roll = new Random();
 
